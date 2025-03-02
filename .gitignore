@@ -1,0 +1,25 @@
+# Django için temel .gitignore
+
+# __pycache__ ve derlenmiş Python dosyaları
+__pycache__/
+*.pyc
+*.pyo
+
+# SQLite veritabanı dosyaları
+*.sqlite3
+db.sqlite3
+
+# Ortam dosyaları (Gizli bilgiler içerir!)
+.env
+*.env
+
+# Sanal ortam dosyaları (venv veya env)
+env/
+venv/
+
+# Statik ve medya dosyaları
+/static/
+/media/
+
+# Log dosyaları
+*.log
