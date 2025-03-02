@@ -18,12 +18,12 @@ Projeyi kendi bilgisayarınızda çalıştırmak için şu adımları takip edin
 
 ### 1️⃣ Gerekli Paketleri Yükleyin  
 ```bash
-pip install -r requirements.txt
+pip install django
 ```
 
 ### 2️⃣ Veritabanı Migrasyonlarını Yapın
 ```bash
-pip install -r requirements.txt
+python manage.py migrate
 ```
 
 ### 3️⃣ Admin Kullanıcısı
