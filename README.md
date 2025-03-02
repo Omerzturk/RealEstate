@@ -29,6 +29,7 @@ pip install -r requirements.txt
 ### 3️⃣ Admin Kullanıcısı
 - **Kullanıcı Adı**: admin  
 - **Şifre**: admin12345
+
 Eğer farklı bir admin kullanıcısı oluşturmak isterseniz:
 ```bash
 python manage.py createsuperuser
