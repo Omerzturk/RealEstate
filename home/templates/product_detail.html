@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{{ product.name }} - Detay{% endblock %}
+
+{% block extra_css %}
+<style type="text/css">
+.info-panel {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    min-height: 520px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* İkon ile yazılar arasındaki boşluk artırıldı */
+    padding: 10px 0;
+}
+
+.info-item .icon {
+    font-size: 35px;
+    color: #ff6600;
+    width: 50px; /* Sabit genişlik verildi ki hizalama bozulmasın */
+    text-align: center;
+}
+
+.info-text strong {
+    font-size: 22px;
+    color: #333;
+}
+
+.info-text p {
+    font-size: 14px;
+    color: #777;
+    margin: 0;
+}
+
+hr {
+    margin: 5px 0;
+    border: none;
+    border-top: 1px solid #ddd; /* İnce gri çizgi */
+}
+
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'partials/_navbar.html' %}
+
+{% include 'partials/_header.html' %}
+
+
+<!-- Ürün Detay Sayfası Başlığı -->
+
+<div class="single-property section">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <!-- Resim Slaytı (8'lik sütun) -->
+                <div class="col-lg-8">
+                    <div class="main-image">
+                        <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for image in images %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ product.name }}">
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Ürün Bilgileri (Resmin altında) -->
+                    <div class="main-content mt-3">
+                        <span class="category">{{ product.category.name }}</span>
+                        <h4>{{ product.name }}</h4>
+                        <p>{{ product.description }}</p>
+                    </div>
+                </div>
+
+                <!-- Bilgi Paneli -->
+                <div class="col-lg-4">
+                    <div class="info-panel p-4 shadow rounded">
+                        <ul class="list-unstyled">
+                            <li class="info-item d-flex align-items-center">
+                                <i class="fa-solid fa-ruler-combined icon"></i>
+                                <div class="info-text">
+                                    <strong>{{ product.square_meters }} m²</strong>
+                                    <p>Total Flat Space</p>
+                                </div>
+                            </li>
+                            <hr>
+                            <li class="info-item d-flex align-items-center">
+                                <i class="fa-solid fa-layer-group icon"></i>
+                                <div class="info-text">
+                                    <strong>{{ product.floor_count }}</strong>
+                                    <p>Floors</p>
+                                </div>
+                            </li>
+                            <hr>
+                            <li class="info-item d-flex align-items-center">
+                                <i class="fa-solid fa-door-open icon"></i>
+                                <div class="info-text">
+                                    <strong>{{ product.room_count }}</strong>
+                                    <p>Rooms</p>
+                                </div>
+                            </li>
+                            <hr>
+                            <li class="info-item d-flex align-items-center">
+                                <i class="fa-solid fa-bath icon"></i>
+                                <div class="info-text">
+                                    <strong>{{ product.bathroom_count }}</strong>
+                                    <p>Bathrooms</p>
+                                </div>
+                            </li>
+                            <hr>
+                            <li class="info-item d-flex align-items-center">
+                                <i class="fa-solid fa-tags icon"></i>
+                                <div class="info-text">
+                                    <strong>{{ product.category.name }}</strong>
+                                    <p>Category</p>
+                                </div>
+                            </li>
+                            <hr>
+                            <li class="info-item d-flex align-items-center">
+                                <i class="fa-solid fa-dollar-sign icon"></i>
+                                <div class="info-text">
+                                    <strong>${{ product.price }}</strong>
+                                    <p>Price</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% include 'partials/_footer.html' %}
+{% endblock %}

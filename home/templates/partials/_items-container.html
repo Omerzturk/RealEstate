@@ -1,0 +1,27 @@
+<div class="properties section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 offset-lg-4">
+                <div class="section-heading text-center">
+                    <h6>| Properties</h6>
+                    <h2>We Provide The Best Property You Like</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% block items %}
+
+                {% if request.resolver_match.view_name == "home"  %}
+                    {% for product in products|slice:":3" %}
+                        {% include 'partials/_items.html' %} <!-- Her ürün için şablonu ekle -->
+                    {% endfor %}
+                {% else %}
+                    {% for product in products %}
+                        {% include 'partials/_items.html' %} <!-- Her ürün için şablonu ekle -->
+                    {% endfor %}
+                {% endif %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>

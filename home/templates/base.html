@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <title>{% block title %}Site Başlığı{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <!-- <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">  -->
+    <link rel="stylesheet" href="{% static 'css/templatemo-villa-agency.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <style>
+        .navbar-custom {
+            background-color: #fff; /* Arka plan rengi */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+        }
+        .navbar-custom .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000; /* Logo rengi */
+        }
+        .navbar-custom .nav-link {
+            color: #000 !important; /* Link rengi */
+            margin: 0 10px;
+            font-weight: 500;
+        }
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: #ff6f00 !important; /* Hover ve aktif durumda turuncu */
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+    <!--
+
+    TemplateMo 591 villa agency
+
+    https://templatemo.com/tm-591-villa-agency
+
+    -->
+</head>
+<body>
+<!-- Preloader (Loading) -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+
+{% block content %}{% endblock %}
+
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/isotope.min.js' %}"></script>
+<script src="{% static 'js/owl-carousel.js' %}"></script>
+<script src="{% static 'js/counter.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+{% block extra_js %}{% endblock %}
+
+</body>

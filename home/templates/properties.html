@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}product{% endblock %}
+
+
+{% block content %}
+
+
+{% include 'partials/_navbar.html' %}
+
+
+<!-- Header -->
+{% include 'partials/_header.html' %}
+
+
+<div class="section properties">
+    <div class="container">
+        <!-- Filtreleme Bölümü -->
+        <ul class="properties-filter">
+            <li><a href="#" data-category="all">Show All</a></li>
+            <li><a href="#" data-category="Apartman">Apartman</a></li>
+            <li><a href="#" data-category="Villa">Villa</a></li>
+            <li><a href="#" data-category="Tripleks">Tripleks</a></li>
+        </ul>
+
+
+        <div class="row properties-box">
+            {% for property in properties %}
+            <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items"
+                 data-category="{{ property.category.name }}">
+                <div class="item">
+                    <a href="{% url 'product_detail' property.id %}">
+                        {% if property.images.first %}
+                        <img src="{{ property.images.first.image.url }}" alt="{{ property.name }}">
+                        {% else %}
+                        <img src="{% static 'img/property-01.jpg' %}" alt="{{ property.name }}">
+                        {% endif %}
+                    </a>
+
+                    <span class="category">{{ property.category.name }}</span>
+                    <h6>${{ property.price }}</h6>
+                    <h4><a href="{% url 'product_detail' property.id %}">{{ property.address }}</a></h4>
+                    <ul>
+                        <li>Bedrooms: <span>{{ property.room_count }}</span></li>
+                        <li>Bathrooms: <span>{{ property.bathroom_count }}</span></li>
+                        <li>Area: <span>{{ property.square_meters|floatformat:"0" }}m²</span></li>
+                        <li>Floor: <span>{{ property.floor_count }}</span></li>
+                    </ul>
+                    <div class="main-button">
+                        <a href="{% url 'product_detail' property.id %}">Schedule a visit</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+
+{% block extra_js %}
+<script type="text/javascript">
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const filterLinks = document.querySelectorAll(".properties-filter a");
+    const properties = document.querySelectorAll(".properties-items");
+
+    if (filterLinks.length === 0 || properties.length === 0) {
+        console.warn("Filtre bağlantıları veya öğeler bulunamadı.");
+        return;
+    }
+
+    // Filtreleme işlevi
+    function filterProperties(category) {
+        properties.forEach(property => {
+            const propertyCategory = property.getAttribute("data-category");
+            if (category === "all" || propertyCategory === category) {
+                property.style.display = "block";
+            } else {
+                property.style.display = "none";
+            }
+        });
+    }
+
+    // Tüm filtre bağlantılarına tıklama olayını ekle
+    filterLinks.forEach(link => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault(); // Sayfanın yeniden yüklenmesini önle
+
+            const selectedCategory = this.getAttribute("data-category"); // Kategori adını al
+            filterProperties(selectedCategory);
+
+            // Aktif butonu güncelle
+            filterLinks.forEach(l => l.classList.remove("is_active"));
+            this.classList.add("is_active");
+        });
+    });
+
+    // Varsayılan olarak tümünü göster
+    filterProperties("all");
+});
+
+
+</script>
+{% endblock %}
+{% include 'partials/_footer.html' %}
+{% endblock %}
